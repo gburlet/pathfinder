@@ -6,7 +6,7 @@
 //
 
 class MapCell {
-    enum Terrain { GROUND, ROCK, WATER }
+    public enum Terrain { GROUND, ROCK, WATER }
 
     private Terrain type;
 
