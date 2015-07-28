@@ -18,9 +18,11 @@ public class PathFinder {
                 System.exit(1);
             }
         }
-        System.out.println(mapSize);
 
         // create square map
-        Map map = new Map(mapSize, mapSize);
+        MapModel mm = new MapModel(mapSize, mapSize);
+        MapView mv = new MapView();
+        MapController mc = new MapController(mm, mv);
+        mc.draw();
     }
 }
