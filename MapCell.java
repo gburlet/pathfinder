@@ -6,16 +6,20 @@
 //
 
 class MapCell {
+    
     public enum Terrain { GROUND, ROCK, WATER }
 
     private Terrain type;
+    private Location location;
 
-    public MapCell() {
+    public MapCell(Location l) {
         this.type = Terrain.GROUND;
+        this.location = l;
     }
 
-    public MapCell(Terrain type) {
+    public MapCell(Terrain type, Location l) {
         this.type = type;
+        this.location = l;
     }
 
     // getters and setters
@@ -25,5 +29,9 @@ class MapCell {
 
     public void setTerrain(Terrain type) {
         this.type = type;
+    }
+
+    public Location getLocation() {
+        return this.location;
     }
 }

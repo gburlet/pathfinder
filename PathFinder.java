@@ -47,10 +47,13 @@ public class PathFinder {
 
         // create map with given rock density
         MapModel mm = new MapModel(mapWidth, mapHeight, rockDensity, waterDensity);
-        mm.randomizeTerrain();
-
         MapView mv = new MapView();
         MapController mc = new MapController(mm, mv);
-        mc.draw();
+
+        mc.randomizeMap();
+
+        // create agent and air-drop on map
+        Agent greg = new Agent("Greg", mm.getRandomLocation()); 
+        mc.dropAgent(greg);
     }
 }

@@ -6,6 +6,7 @@
 //
 
 public class MapController {
+    
     private MapModel mm;
     private MapView mv;
 
@@ -14,7 +15,30 @@ public class MapController {
         this.mv = view;
     }
 
-    public void draw() {
-        this.mv.render(this.mm.getCells(), this.mm.getWidth(), this.mm.getHeight());
+    // update terrain densities and randomly generate new map
+    public void randomizeMap(double rockDensity, double waterDensity) {
+        // update model
+        this.mm.setRockDensity(rockDensity);
+        this.mm.setWaterDensity(waterDensity);
+        this.randomizeMap();
+    }
+
+    // member overload for no update of terrain densities
+    public void randomizeMap() {
+        this.mm.randomizeTerrain();
+        this.draw();
+    }
+
+    public void dropAgent(Agent a) {
+        // update model
+        this.mm.addAgent(a);
+
+        // update view
+        this.draw();
+    }
+
+    // Helper function to redraw the view
+    private void draw() {
+        this.mv.render(this.mm.getCells(), this.mm.getWidth(), this.mm.getHeight(), this.mm.getAgents());
     }
 }

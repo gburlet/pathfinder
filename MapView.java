@@ -10,7 +10,7 @@ import java.util.*;
 public class MapView {
 
     // map from terrain type to visual ASCII representation
-    Map<MapCell.Terrain, Character> terrainMap;
+    private static Map<MapCell.Terrain, Character> terrainMap;
     
     public MapView() {
         // construct terrain map
@@ -20,16 +20,29 @@ public class MapView {
         terrainMap.put(MapCell.Terrain.WATER, '~');
     }
 
-    public void render(MapCell[][] grid, int width, int height) {
+    public void render(MapCell[][] grid, int width, int height, List<Agent> agents) {
         for (int i = 0; i < width; i++) {
             String row = "";
             for (int j = 0; j < height; j++) {
-                row += terrainMap.get(grid[i][j].getTerrain());
+                Location loc = new Location(i,j);
+                boolean agentHere = false;
+                for (Agent a : agents) {
+                    if (a.getCurrentLocation().equals(loc)) {
+                        row += a.getName().substring(0,1);
+                        agentHere = true;
+                    }
+                }
+
+                if (!agentHere) {
+                    row += terrainMap.get(grid[i][j].getTerrain());
+                }
+
                 if (j < height-1) {
                     row += ' ';
                 }
             }
             System.out.println('[' + row + "]\n");
         }
+        System.out.println("\n");
     }
 }
