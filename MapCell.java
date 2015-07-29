@@ -18,8 +18,12 @@ class MapCell {
         this.type = type;
     }
 
-    // getters
+    // getters and setters
     public Terrain getTerrain() {
         return this.type;
+    }
+
+    public void setTerrain(Terrain type) {
+        this.type = type;
     }
 }
