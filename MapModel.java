@@ -12,13 +12,15 @@ public class MapModel {
     private int width;
     private int height;
     private double rockDensity;
+    private double waterDensity;
     private MapCell[][] grid;
 
     // Constructor
-    public MapModel(int width, int height, double rockDensity) {
+    public MapModel(int width, int height, double rockDensity, double waterDensity) {
         this.width = width;
         this.height = height;
         this.rockDensity = rockDensity;
+        this.waterDensity = waterDensity;
         
         this.grid = new MapCell[this.width][this.height];
         
@@ -33,8 +35,13 @@ public class MapModel {
         Random rnd = new Random();
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
-                if (rnd.nextDouble() <= this.rockDensity) {
+                double rand = rnd.nextDouble();
+                if (rand <= this.rockDensity) {
                     MapCell.Terrain type = MapCell.Terrain.ROCK;
+                    this.grid[i][j].setTerrain(type);
+                }
+                else if (rand > this.rockDensity && rand <= this.rockDensity+this.waterDensity) {
+                    MapCell.Terrain type = MapCell.Terrain.WATER;
                     this.grid[i][j].setTerrain(type);
                 }
             }

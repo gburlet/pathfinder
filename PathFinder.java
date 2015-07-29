@@ -11,7 +11,8 @@ public class PathFinder {
         // map default sizes
         int mapWidth = 10;
         int mapHeight = 10;
-        double rockDensity = 0.3;
+        double rockDensity = 0.1;
+        double waterDensity = 0.1;
 
         if (args.length > 0) {
             try {
@@ -36,9 +37,16 @@ public class PathFinder {
                 System.err.println("Third argument must be a float (Rock Density)");
             }
         }
+        if (args.length > 3) {
+            try {
+                waterDensity = Double.parseDouble(args[3]);
+            } catch (NumberFormatException e) {
+                System.err.println("Third argument must be a float (Water Density)");
+            }
+        }
 
         // create map with given rock density
-        MapModel mm = new MapModel(mapWidth, mapHeight, rockDensity);
+        MapModel mm = new MapModel(mapWidth, mapHeight, rockDensity, waterDensity);
         mm.randomizeTerrain();
 
         MapView mv = new MapView();
