@@ -5,6 +5,8 @@
 // Copyright (c) 2015 Greg Burlet. All rights reserved.
 //
 
+import java.util.*;
+
 public class MapController {
     
     private MapModel mm;
@@ -32,6 +34,20 @@ public class MapController {
     public void dropAgent(Agent a) {
         // update model
         this.mm.addAgent(a);
+
+        // update view
+        this.draw();
+    }
+
+    public void pathAgent(Agent a, ArrayList<Location> path) {
+        for (Location l : path) {
+            this.moveAgent(a, l);
+        }
+    }
+
+    // move agent on the map to a given location
+    public void moveAgent(Agent a, Location l) {
+        a.teleport(l);
 
         // update view
         this.draw();

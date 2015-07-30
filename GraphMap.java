@@ -15,7 +15,7 @@ public class GraphMap {
 
     private MapModel mm;
     private int gWeight, rWeight, wWeight; // edge weights for ground, rocks, water
-    private DefaultDirectedWeightedGraph<String, DefaultWeightedEdge> g;
+    private DefaultDirectedWeightedGraph<Location, DefaultWeightedEdge> g;
     private static Map<MapCell.Terrain, Integer> edgeMap;
 
     public GraphMap(MapModel mm, int gWeight, int rWeight, int wWeight) {
@@ -30,7 +30,7 @@ public class GraphMap {
         // add vertices
         for (int i = 0; i < mm.getWidth(); i++) {
             for (int j = 0; j < mm.getHeight(); j++) {
-                g.addVertex(grid[i][j].getLocation().toString());
+                g.addVertex(grid[i][j].getLocation());
             }
         }
 
@@ -51,7 +51,7 @@ public class GraphMap {
                         }
 
                         int edgeWeight = edgeMap.get(grid[i][j].getTerrain()) + edgeMap.get(grid[i+iSur][j+jSur].getTerrain());
-                        DefaultWeightedEdge e = g.addEdge(grid[i][j].getLocation().toString(), grid[i+iSur][j+jSur].getLocation().toString());
+                        DefaultWeightedEdge e = g.addEdge(grid[i][j].getLocation(), grid[i+iSur][j+jSur].getLocation());
                         g.setEdgeWeight(e, (double) edgeWeight);
                     }
                 }
@@ -61,7 +61,13 @@ public class GraphMap {
 
     // get the shortest path between two locations on the map
     // uses Dijkstra's Algorithm
-    public List shortestPath(Location start, Location target) {
-        return DijkstraShortestPath.findPathBetween(this.g, start.toString(), target.toString());
+    public ArrayList<Location> shortestPath(Location start, Location target) {
+        List<DefaultWeightedEdge> edges = DijkstraShortestPath.findPathBetween(this.g, start, target);
+        ArrayList<Location> path = new ArrayList<>();
+        for (DefaultWeightedEdge e : edges) {
+            path.add(this.g.getEdgeTarget(e));
+        }
+
+        return path;
     }
 }

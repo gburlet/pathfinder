@@ -5,6 +5,8 @@
 // Copyright (c) Greg Burlet. All rights reserved.
 //
 
+import java.util.*;
+
 public class PathFinder {
 
     public static void main (String args[]) {
@@ -65,6 +67,8 @@ public class PathFinder {
         int rWeight = 4;
         int wWeight = 2;
         GraphMap gm = new GraphMap(mm, gWeight, rWeight, wWeight);
-        System.out.println(gm.shortestPath(greg.getCurrentLocation(), simon.getCurrentLocation()));
+        ArrayList<Location> path = gm.shortestPath(greg.getCurrentLocation(), simon.getCurrentLocation());
+
+        mc.pathAgent(greg, path);
     }
 }

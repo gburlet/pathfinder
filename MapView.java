@@ -23,7 +23,7 @@ public class MapView {
     public void render(MapCell[][] grid, int width, int height, List<Agent> agents) {
         // pause for a given amount of time to see frame in "animation"
         try {
-            Thread.sleep(1000);
+            Thread.sleep(750);
         } catch (Exception e) {}
 
         this.clearConsole();

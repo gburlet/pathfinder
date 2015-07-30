@@ -105,6 +105,6 @@ public class MapModel {
         int x = rand.nextInt((this.width-1) + 1);
         int y = rand.nextInt((this.height-1) + 1);
         
-        return new Location(x,y);
+        return this.grid[x][y].getLocation();
     }
 }
