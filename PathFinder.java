@@ -53,7 +53,18 @@ public class PathFinder {
         mc.randomizeMap();
 
         // create agent and air-drop on map
-        Agent greg = new Agent("Greg", mm.getRandomLocation()); 
+        Agent greg = new Agent("Greg", mm.getRandomLocation());
         mc.dropAgent(greg);
+
+        // create agent and air-drop on map
+        Agent simon = new Agent("Simon", mm.getRandomLocation()); 
+        mc.dropAgent(simon);
+
+        // create graph representation
+        int gWeight = 1;
+        int rWeight = 4;
+        int wWeight = 2;
+        GraphMap gm = new GraphMap(mm, gWeight, rWeight, wWeight);
+        System.out.println(gm.shortestPath(greg.getCurrentLocation(), simon.getCurrentLocation()));
     }
 }

@@ -21,6 +21,13 @@ public class MapView {
     }
 
     public void render(MapCell[][] grid, int width, int height, List<Agent> agents) {
+        // pause for a given amount of time to see frame in "animation"
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {}
+
+        this.clearConsole();
+
         for (int i = 0; i < width; i++) {
             String row = "";
             for (int j = 0; j < height; j++) {
@@ -44,5 +51,11 @@ public class MapView {
             System.out.println('[' + row + "]\n");
         }
         System.out.println("\n");
+    }
+
+    public final static void clearConsole()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
